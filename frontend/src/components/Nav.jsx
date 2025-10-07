@@ -26,11 +26,11 @@ const Nav = () => {
           <NavLink to="/" className={linkClass}>
             Home
           </NavLink>
-          <NavLink to="/products" className={linkClass}>
-            Products
-          </NavLink>
            <NavLink to="/admin/create-product" className={linkClass}>
             Create Products
+          </NavLink>
+          <NavLink to="/admin/user-product" className={linkClass}>
+           Setting
           </NavLink>
         </nav>
 
@@ -87,13 +87,7 @@ const Nav = () => {
             >
               Home
             </NavLink>
-            <NavLink
-              to="/products"
-              className={linkClass}
-              onClick={() => setMenuOpen(false)}
-            >
-              Products
-            </NavLink>
+            
             <NavLink
               to="/login"
               className="px-4 py-2 rounded-md bg-blue-600 text-white hover:bg-blue-700 w-max"

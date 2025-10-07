@@ -10,8 +10,8 @@ const Login = () => {
 
   const LoginHandler = (user) => {
     dispatch(asyncLoginUser(user));
-    reset(); // clear form after submit
-    navigate("/"); // redirect to home or dashboard after login
+    reset(); 
+    navigate("/"); 
   };
 
   return (

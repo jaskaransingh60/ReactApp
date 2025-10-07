@@ -5,15 +5,14 @@ import { useNavigate, useParams } from "react-router-dom";
 import {
   asyncDeleteProduct,
   asyncUpdateProduct,
- 
 } from "../../store/actions/productActions";
 
 const ProductDetails = () => {
   const { id } = useParams();
-  const {
-    productReducer: { products },
-    userReducer: { users },
-  } = useSelector((state) => state);
+
+  // ✅ Removed "userReducer" to avoid undefined error
+  const products = useSelector((state) => state.productReducer.products);
+
   const product = products?.find(
     (product) => String(product.id) === String(id)
   );
@@ -21,7 +20,6 @@ const ProductDetails = () => {
   const { register, reset, handleSubmit } = useForm();
   const dispatch = useDispatch();
   const navigate = useNavigate();
-
 
   // Set form values when product is loaded
   useEffect(() => {
@@ -56,7 +54,7 @@ const ProductDetails = () => {
 
   return (
     <>
-      <div className="w-full min-h-screen bg-gray-100 flex flex-col md:flex-row  p-6 pt-22">
+      <div className="w-full min-h-screen bg-gray-100 flex flex-col md:flex-row p-6 pt-22">
         {/* Product Image */}
         <div className="flex-shrink-0">
           <img
@@ -83,9 +81,9 @@ const ProductDetails = () => {
           </button>
         </div>
 
-       
-        <div className="flex items-center justify-center min-h-screen  py-6 px-4   sm:px-6 lg:px-8">
-          <div className="w-full max-w-2xl  shadow-2xl rounded-2xl p-10 border border-gray-200">
+        {/* Update Form */}
+        <div className="flex items-center justify-center min-h-screen py-6 px-4 sm:px-6 lg:px-8">
+          <div className="w-full max-w-2xl shadow-2xl rounded-2xl p-10 border border-gray-200">
             {/* Header */}
             <h2 className="text-4xl font-extrabold text-center text-gray-900 mb-10">
               ✏️ Update Product
@@ -122,7 +120,7 @@ const ProductDetails = () => {
                 />
               </div>
 
-              {/* Category & Price in one row */}
+              {/* Category & Price */}
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
                 {/* Category */}
                 <div>
@@ -171,6 +169,7 @@ const ProductDetails = () => {
                 </button>
                 <button
                   onClick={DeleteHandler}
+                  type="button"
                   className="w-full py-3 bg-red-600 text-white font-semibold rounded-xl shadow-lg hover:bg-red-700 transform hover:scale-[1.02] transition duration-300"
                 >
                   Delete Product
